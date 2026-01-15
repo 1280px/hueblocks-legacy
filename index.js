@@ -178,7 +178,23 @@ function updateSteps() {
 }
 
 
-
+/**
+ * https://gist.github.com/ryancat/9972419b2a78f329ce3aebb7f1a09152
+ * 
+ * Compare color difference in RGB
+ * @param {Array} rgb1 First RGB color in array
+ * @param {Array} rgb2 Second RGB color in array
+ */
+ function deltaRgb (rgb1, rgb2) {
+	const [ r1, g1, b1 ] = rgb1,
+		  [ r2, g2, b2 ] = rgb2,
+		  drp2 = Math.pow(r1 - r2, 2),
+		  dgp2 = Math.pow(g1 - g2, 2),
+		  dbp2 = Math.pow(b1 - b2, 2),
+		  t = (r1 + r2) / 2
+  
+	return (256*3) - Math.sqrt(2 * drp2 + 4 * dgp2 + 3 * dbp2 + t * (drp2 - dbp2) / 256);
+}
 
 
 /* block generation */
@@ -200,14 +216,9 @@ function genBlocks() {
 		for (let blockCount = blockData.length -1; blockCount >= 0; ) {
 			let currentBlock = blockData[blockCount];
 
-			/* count similarity for Red, Green and Blue */
-			var calcR = ( 255 - Math.abs(currentStep[0] - currentBlock.rgb[0]) ) / 255,
-				calcG = ( 255 - Math.abs(currentStep[1] - currentBlock.rgb[1]) ) / 255,
-				calcB = ( 255 - Math.abs(currentStep[2] - currentBlock.rgb[2]) ) / 255;
-
 			/* 0.0 means 'completely opposite colour', 1.0 means 'same colour';
 			values <0.8 in 99% of cases are junk */
-			var currentComparison = [currentBlock.id, (calcR + calcG + calcB) / 3];
+			var currentComparison = [currentBlock.id, deltaRgb(currentStep, currentBlock.rgb)];
 
 			blockCount -= 1;
 
