@@ -85,46 +85,46 @@ function rgbToHex(r,g,b){return"#"+((1<<24)+(r<<16)+(g<<8)+ b).toString(16).slic
 /* calculate steps */
 let steps = [], stepLen = 5;
 
-/* change cLenght back to default value */
-function cLenghtDefaulter() {
-	if ($('#cLenght3').is(':checked')) {
+/* change cLength back to default value */
+function cLengthDefaulter() {
+	if ($('#cLength3').is(':checked')) {
 		stepLen = 9;
-		$('#cLenght3').prop("checked", false);
-		$('#cLenght1').prop("checked", true);
-		setTimeout(() => $('#cLenghtBtn3').html('Custom...'), 1);
+		$('#cLength3').prop("checked", false);
+		$('#cLength1').prop("checked", true);
+		setTimeout(() => $('#cLengthBtn3').html('Custom...'), 1);
 }}
 
-/* make sure "Custom..." cLenght btn is never selected at start to prevent errors */
-cLenghtDefaulter();
+/* make sure "Custom..." cLength btn is never selected at start to prevent errors */
+cLengthDefaulter();
 
-/* create a prompt when "Custom..." cLenght btn is clicked */
-$('#cLenght3').on('click', () => {
-	($('#cLenghtBtn3').html() != "Custom...") ?
-		stepLen = prompt('Please enter a custom length (any integer equal or more than 3)', parseInt( $('#cLenghtBtn3').html().replace("Custom (", "").replace(")", "") ))
-		: stepLen = prompt('Please enter a custom length (any integer equal or more than 3)', stepLen);
+/* create a prompt when "Custom..." cLength btn is clicked */
+$('#cLength3').on('click', () => {
+	($('#cLengthBtn3').html() != "Custom...") ?
+		stepLen = prompt('Please enter a custom length (any integer ≥ 3)', parseInt( $('#cLengthBtn3').html().replace("Custom (", "").replace(")", "") ))
+		: stepLen = prompt('Please enter a custom length (any integer ≥ 3)', stepLen);
 
-	/* process normal numbers */
-	stepLen = parseInt(stepLen);
+	/* process null */
+	if (stepLen == null) cLengthDefaulter();
 
 	/* process amogus */
 	if (stepLen == 'amogus' | stepLen == 'sus') {
 		alert('OH MY GOD THE CHAIN IS SUS HAHA :D :D LOL AMOGUS MEME SO FUNNY SUS SUS SUSSY LMAO HAHAHAHAHA :DDDDD');
 		$("#ggBtn, label, h1, h2, a, em").html("ｓｕｓ");
-		cLenghtDefaulter();
+		cLengthDefaulter();
 	}
 
-	/* process null */
-	if (stepLen == null) cLenghtDefaulter();
+	/* process normal numbers */
+	stepLen = parseInt(stepLen);
 
 	/* process invalid non-numeral input values */
 	if (isNaN(stepLen)) {
 		alert('Enter a NUMBER you goof >_<');
-		cLenghtDefaulter();
+		cLengthDefaulter();
 	}
 
 	/* process invalid numeral input values */
 	if (stepLen < 3) {
-		alert('The entered number is too small; please enter at least 3 or bigger.');
+		alert('The entered number is too small; please enter at least 3.');
 		stepLen = 3;
 	}
 	if (stepLen > 999) {
@@ -133,13 +133,13 @@ $('#cLenght3').on('click', () => {
 			stepLen = 999;
 	}}
 
-	/* display value on cLenght button */
+	/* display value on cLength button */
 	if (Number.isInteger(stepLen) == true) {
-		$('#cLenghtBtn3').html('Custom (' + stepLen + ')');
+		$('#cLengthBtn3').html('Custom (' + stepLen + ')');
 
 		/* handler for values more than 99999 to be displayed correctly */
 		if (stepLen > 99999) {
-			$('#cLenghtBtn3').html('Custom (99999+)');
+			$('#cLengthBtn3').html('Custom (99999+)');
 		}
 	}
 });
@@ -149,8 +149,8 @@ function updateSteps() {
 	console.log('[c] Calculating colours for every step... ');
 
 	/* take steps count from non-custom button (must be at least 3, otherwise just makes no sense) */
-	if ($('#cLenght1').is(':checked')) stepLen = 9;
-	if ($('#cLenght2').is(':checked')) stepLen = 25;
+	if ($('#cLength1').is(':checked')) stepLen = 9;
+	if ($('#cLength2').is(':checked')) stepLen = 25;
 
 	/* wipe previous steps */
 	steps = [];
@@ -428,7 +428,7 @@ async function onDirectoryChange(d) {
 		/* allow confirm if 1 or more images are loaded;
 		we add +1 because check happens before picture appends to list, 
 		and the least amount possible to upload is 1 image */
-		if (customBlockset.length + 1 >= 0) CBConfirmUpdater(false); 
+		if (customBlockset.length + 1 >= 3) CBConfirmUpdater(false); 
 
 	}
 }
@@ -637,7 +637,7 @@ function colorBPick(color) {
 	$('#BPickScreenVis').html('');
 
 	/* store selected colour (color1 or color2) value */
-	BPickSCV = color;
+	BPickCSV = color;
 
 	/* visualise all the blocks available  */
 	var BPickVisLetter = 'ибражы';
@@ -672,8 +672,8 @@ $('#colorBPick2').on('click', () => colorBPick('color2'));
 function BPickSelect(blockid) {
 	var BPickSelectedBlockResult = blockData.filter((bdblock) => bdblock.id == blockid);
 
-	if (BPickSCV == 'color1') $('#colorSel1').val(rgbToHex(BPickSelectedBlockResult[0].rgb[0],BPickSelectedBlockResult[0].rgb[1],BPickSelectedBlockResult[0].rgb[2]));
-	if (BPickSCV == 'color2') $('#colorSel2').val(rgbToHex(BPickSelectedBlockResult[0].rgb[0],BPickSelectedBlockResult[0].rgb[1],BPickSelectedBlockResult[0].rgb[2]));
+	if (BPickCSV == 'color1') $('#colorSel1').val(rgbToHex(BPickSelectedBlockResult[0].rgb[0],BPickSelectedBlockResult[0].rgb[1],BPickSelectedBlockResult[0].rgb[2]));
+	if (BPickCSV == 'color2') $('#colorSel2').val(rgbToHex(BPickSelectedBlockResult[0].rgb[0],BPickSelectedBlockResult[0].rgb[1],BPickSelectedBlockResult[0].rgb[2]));
 
 	updateColors();
 	$('#BPickScreen').fadeOut(300);
@@ -713,4 +713,3 @@ $(document).ready(function() {
 	/* enable GG button when the script is ready */
 	$("#ggBtn").prop("disabled", false);
 })
-

@@ -131,15 +131,15 @@ small {
 	padding: 14px 0;
 }
 
-.lenghtPicker {
+.lengthPicker {
 	width: 460px;
 	margin-left: 20px;
 	border-right: 1px solid #fff2;
 }
-#cLenght1, #cLenght2, #cLenght3 {
+#cLength1, #cLength2, #cLength3 {
 	display: none;
 }
-#cLenghtBtn1, #cLenghtBtn2, #cLenghtBtn3 {
+#cLengthBtn1, #cLengthBtn2, #cLengthBtn3 {
 	display: inline-block;
 	width: 124px;
 	margin: -4px 8px 4px;	padding: 11px 0;
@@ -150,17 +150,17 @@ small {
 	border: 2px solid #fff9;	border-radius: 4px;
 	box-shadow: 0 0 0 0 #fff0;
 }
-#cLenghtBtn1:hover, #cLenghtBtn2:hover, #cLenghtBtn3:hover {
+#cLengthBtn1:hover, #cLengthBtn2:hover, #cLengthBtn3:hover {
 	background-color: #fff3;
 	border: 2px solid #fff0;
 }
-#cLenghtBtn1:hover:active, #cLenghtBtn2:hover:active, #cLenghtBtn3:hover:active {
+#cLengthBtn1:hover:active, #cLengthBtn2:hover:active, #cLengthBtn3:hover:active {
 	background-color: #fff !important;
 	color: #151942 !important;
 	border: 2px solid #fff !important;
 	box-shadow: 0 0 0 2px #fff9 !important;
 }
-#cLenght1:checked+label, #cLenght2:checked+label, #cLenght3:checked+label {
+#cLength1:checked+label, #cLength2:checked+label, #cLength3:checked+label {
 	background-color: #fff;
 	color: #151942;
 	border: 2px solid #fff;
