@@ -262,7 +262,7 @@ $('#visUpscale').on('click', () => { if (visSize < 256) {
 /* update and show popup when block is hovered */
 function showPopup(block) {
 	$('#visPopup').html($(block).attr('blockname'));
-	$('#visPopup').css('left', block.x + 4).css('top', block.y + 4);
+	$('#visPopup').css('left', $(block).offset().left + 4).css('top', $(block).offset().top + 4);
 	$('#visPopup').show();
 }
 
